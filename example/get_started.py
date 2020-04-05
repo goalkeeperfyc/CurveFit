@@ -19,7 +19,7 @@ import pandas
 import numpy
 import random 
 # add path to sys path
-sys.path.append("D:\python_code\Forked_CurveFit\src")
+sys.path.append("D:\python_code\CurveFit\src")
 import curvefit
 
 
@@ -28,7 +28,7 @@ def simulated_generalized_logistic(t, params) :
     alpha = params[0]
     beta  = params[1]
     p     = params[2]
-    return p / ( 1.0 + numpy.exp( - alpha * ( t - beta ) ) ) + random.random()
+    return p / ( 1.0 + numpy.exp( - alpha * ( t - beta ) ) ) + 0.01 * random.random()
 
 
 # model for the mean of the data
@@ -37,7 +37,8 @@ def generalized_logistic(t, params) :
     beta  = params[1]
     p     = params[2]
     return p / ( 1.0 + numpy.exp( - alpha * ( t - beta ) ) )
-#
+
+
 # link function used for beta
 def identity_fun(x) :
     return x
@@ -45,10 +46,17 @@ def identity_fun(x) :
 # link function used for alpha, p
 def exp_fun(x) :
     return numpy.exp(x)
-#
+
+
 # params_true
 params_true       = numpy.array( [ alpha_true, beta_true, p_true ] )
-#
+
+# when t = 3, get the value of y
+print("t is %s, the fitted value is %s" 
+      % ("1.5", generalized_logistic(1.5, params_true)))
+print("t is %s, the fitted value is %s" 
+      % ("3", generalized_logistic(3, params_true)))
+
 # data_frame
 independent_var   = numpy.array(range(n_data)) * beta_true / (n_data-1)
 measurement_value = simulated_generalized_logistic(independent_var, params_true)
