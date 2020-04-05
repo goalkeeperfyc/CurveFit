@@ -1,6 +1,12 @@
 #! /bin/python3
 # vim: set expandtab:
 # -------------------------------------------------------------------------
+
+# Level: p controls the maximum asymptotic level that the rate can reach
+# Slope: α controls the speed of the infection
+# Inflection: β is the time at which the rate of change of D is maximal.
+
+
 n_data       = 21
 num_params   = 3
 alpha_true   = 2.0
@@ -11,6 +17,8 @@ rel_tol      = 1e-6
 import sys
 import pandas
 import numpy
+# add path to sys path
+sys.path.append("D:\python_code\CurveFit\src")
 import curvefit
 #
 # model for the mean of the data
@@ -45,7 +53,9 @@ data_dict         = {
     'data_group'        : data_group        ,
 }
 data_frame        = pandas.DataFrame(data_dict)
-#
+
+print(data_frame)
+
 # curve_model
 col_t        = 'independent_var'
 col_obs      = 'measurement_value'
@@ -80,4 +90,7 @@ for i in range(num_params) :
     assert abs(rel_error) < rel_tol
 #
 print('get_started.py: OK')
-sys.exit(0)
+
+print(params_estimate)
+
+# sys.exit(0)

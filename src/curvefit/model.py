@@ -2,11 +2,13 @@
 """
     Logistic Curve Fitting
 """
-from copy import deepcopy
+import sys
+sys.path.append("D:\python_code\CurveFit\src")
+
 import numpy as np
+from copy import deepcopy
 from scipy.optimize import minimize
 from . import utils
-
 from curvefit.utils import get_initial_params
 from curvefit.utils import compute_starting_params
 
@@ -128,7 +130,8 @@ class CurveModel:
         self.fun_gprior = None
 
     def unzip_x(self, x):
-        """Unzip raw input to fixed effects and random effects.
+        """
+        Unzip raw input to fixed effects and random effects.
 
         Args:
             x (numpy.ndarray):
