@@ -44,5 +44,14 @@ def error_function(x):
 # print(np.exp(-4))
 
 i, error = integrate.quad(error_function, 0, 0.1)
-print(i)
-print(erf(0.1))
+# print(i)
+# print(erf(0.1))
+
+t = 3
+params = np.array([1, 2, 3])
+alpha = params[0]
+beta = params[1]
+p = params[2]
+x = alpha * (t - beta)
+
+print(erf(x))
