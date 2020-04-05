@@ -19,9 +19,11 @@ from scipy.special import erf
 # test scipy.special.erf
 
 # array 
-x = np.array([1, 1, 4, 7, 10, 100])
-error_function_test = erf(x)
-print(error_function_test)
+x = np.array([x/100 for x in range(1, 11)])
+# x = np.array([1, 1, 4, 7, 10, 100])
+# error_function_test = erf(x)
+print(x)
+print(erf(x))
 
 
 # define error function
