@@ -63,51 +63,48 @@ We specify the statistical model as follows:
 - Measurement model:
 $$
 \log(y_j^t) = \frac{p_j}{2}\left(1+ \frac{2}{\sqrt{\pi}}\int_{0}^{\alpha_j(t-\beta_j)} \exp\left(-\tau^2\right)d\tau\right) + \epsilon_{t,j} \\
+
 \epsilon_{t,j}  \sim N(0, V_t)
 $$
 
-- \(\beta\)-model specification:
-\[
-\begin{aligned}
-\beta_j &= \beta + \gamma_j S_j + \epsilon_j^\beta \\
-\gamma_j &\sim N(\overline \gamma, V_\gamma) \\
-\epsilon_j^\beta &\sim N(0, V_\beta)
-\end{aligned}
-\]
-- \(\alpha\)-model specification:
-\[
-\begin{aligned}
-\alpha_j &= \exp(\alpha + u_j^\alpha) \\
-u_{\alpha, j} & \sim N(0, V_\alpha)
-\end{aligned}
-\]
-- \(p\)-model specification:
-\[
-\begin{aligned}
-p_j & = \exp(p + u_j^p) \\
-u_{p,j} & \sim N(0, V_p)
-\end{aligned}
-\]
+- $\beta$-model specification:
+$$
+\beta_j = \beta + \gamma_j S_j + \epsilon_j^ \beta \\ 
+
+\gamma_j \sim N(\overline \gamma, V_\gamma) \\
+
+\epsilon_j^\beta \sim N(0, V_\beta)
+$$
+- $\alpha$-model specification:
+$$
+\alpha_j = \exp(\alpha + u_j^\alpha) \\
+u_{\alpha, j}  \sim N(0, V_\alpha)
+$$
+- $p$-model specification:
+$$
+p_j  = \exp(p + u_j^p) \\
+u_{p,j}  \sim N(0, V_p)
+$$
 
 In this example, the user specifies
 
-- prior mean \(\overline \gamma\)
-- variance parameters \(V_t, V_\gamma, V_\beta, V_\alpha, V_p\).
+- prior mean $\overline \gamma$.
+- variance parameters $V_t, V_\gamma, V_\beta, V_\alpha, V_p$.
 
 CurveFit estimates:
 
-- fixed effects \(\alpha, \beta, p\)
-- random effects \(\{\gamma_j, u_j^\alpha, u_j^\beta, u_j^p\}\)
+- fixed effects $\alpha, \beta, p$
+- random effects $\{\gamma_j, u_j^\alpha, u_j^\beta, u_j^p\}$
 
-Exponential link functions are used to model non-negative parameters \(\alpha, p\).
+Exponential link functions are used to model non-negative parameters $\alpha, p$.
 
 ## Constraints
 
 Simple bound constraints on parameters can be used to make the model more robust.
 For any fixed or random effect, the user can enter simple bound constraints of the form
-\[
+$$
 L \leq \theta \leq U.
-\]
+$$
 The parameters returned by CurveFit are guaranteed to satisfy these simple bounds.
 
 ## Optimization Procedure
@@ -145,35 +142,35 @@ of the mean effects, and random effects uncertainty captures the variation acros
 
 For any estimator obtained by solving a nonlinear least squares problem, we can use the Fisher information matrix
 to get an asymptotic approximation to the uncertainty. Let
-\[
+$$
 \hat{ \theta} = \arg\min_{ \theta} := \frac{1}{2}\theta^T W^{-1} \theta  + \frac{1}{2 \sigma^2} \|\Sigma^{-1/2} (y - f( \theta;  X))\|^2
-\]
-where \(W\) is any prior variance and \(\Sigma\) is the variance of  observations.
+$$
+where $W$ is any prior variance and $\Sigma$ is the variance of  observations.
 Then our approximation for the variance matrix of the estimate is given by
-\[
+$$
 V(\hat \theta) = \mathcal{I}(\theta)^{-1} = \left(J_{\hat \theta}^T \Sigma^{-1} J_{\hat \theta} + W^{-1} \right)^{-1}
-\]
+$$
 where
-\[
+$$
 J_{\hat{ \theta}} := \nabla_{ \theta} f( \theta;  X)  
-\]
-is the Jacobian matrix evaluated at \(\theta = \hat \theta\). The Jacobian is also computed using the complex step method.
+$$
+is the Jacobian matrix evaluated at $\theta = \hat \theta$. The Jacobian is also computed using the complex step method.
 
 - Random effects
 
 To obtain the variance of the random effects, we derive an  empirical variance matrix across locations.
-Given a set of zero mean random effect estimates \(\{v_j\}\), with each \(v_j\) a vector
-of \(k\) of random effect types, we get an empirical matrix \(V_0 \in \mathbb{R}^{k\times k}\) by
-\[
+Given a set of zero mean random effect estimates $\{v_j\}$, with each $v_j$ a vector
+of $k$ of random effect types, we get an empirical matrix $V_0 \in \mathbb{R}^{k\times k}$ by
+$$
 V_0 = \frac{1}{n}\sum_{j=1}^N v_j v_j^T
-\]
-To obtain posterior uncertainty for each specific location, we use the empirical \(V_0\) as a prior,
+$$
+To obtain posterior uncertainty for each specific location, we use the empirical $V_0$ as a prior,
 and any data at the location as the measurement model, and re-fit the  location:
-\[
+$$
 \hat{ \theta}_i = \arg\min_{ \theta} := \frac{1}{2}\theta_i^T V_0^{-1}\theta_i +  \frac{1}{2 \sigma^2} \| \Sigma_i^{-1/2}(y_i - f_i( \theta_i;  X_i))\|^2
-\]
+$$
 Within each location, this is analogous to the fixed effects analysis. The location-specific uncertainty is then estimated from
 the same Fisher information analysis:
-\[
+$$
 V_i({\hat \theta}) =   ( J_i^T  \Sigma_i ^{-1}  J_i + V_0^{-1})^{-1}.
-\]
+$$
