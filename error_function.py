@@ -14,7 +14,7 @@ import math
 import numpy as np
 import curvefit
 from scipy.special import erf
-
+from scipy import integrate
 
 # test scipy.special.erf
 
@@ -22,8 +22,8 @@ from scipy.special import erf
 x = np.array([x/100 for x in range(1, 11)])
 # x = np.array([1, 1, 4, 7, 10, 100])
 # error_function_test = erf(x)
-print(x)
-print(erf(x))
+# print(x)
+# print(erf(x))
 
 
 # define error function
@@ -32,3 +32,17 @@ print(erf(x))
 #     beta = params[1]
 #     p = params[2]
 #     erf = p / 2 + p / np.sqrt(math.pi) * 
+
+
+def error_function(x):
+    return 2 / math.sqrt(math.pi) * math.exp(-x**2)
+
+
+# assert error_function(2) == 2 / math.pi * np.exp(-4)
+
+# print(error_function(2))
+# print(np.exp(-4))
+
+i, error = integrate.quad(error_function, 0, 0.1)
+print(i)
+print(erf(0.1))
