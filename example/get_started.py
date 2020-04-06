@@ -61,7 +61,7 @@ print("t is %s, the fitted value is %s"
 independent_var   = numpy.array(range(n_data)) * beta_true / (n_data-1)
 measurement_value = simulated_generalized_logistic(independent_var, params_true)
 measurement_std   = n_data * [ 0.1 ]
-constant_one      = n_data * [ 1.0 ]
+constant_one      = n_data * [ 0.5 ]
 data_group        = n_data * [ 'world' ]
 data_dict         = {
     'independent_var'   : independent_var   ,
@@ -78,6 +78,7 @@ print(data_frame)
 col_t        = 'independent_var'
 col_obs      = 'measurement_value'
 col_covs     = num_params *[ [ 'constant_one' ] ]
+print(col_covs)
 col_group    = 'data_group'
 param_names  = [ 'alpha', 'beta',       'p'     ]
 link_fun     = [ exp_fun, identity_fun, exp_fun ]
