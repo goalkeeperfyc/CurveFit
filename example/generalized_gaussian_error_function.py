@@ -93,7 +93,7 @@ curve_model = curvefit.CurveModel(
 )
 #
 # fit_params
-fe_init         = params_true / 3.0
+fe_init         = params_true / 10
 curve_model.fit_params(fe_init)
 params_estimate = curve_model.params
 #
