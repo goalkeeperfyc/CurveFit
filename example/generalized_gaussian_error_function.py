@@ -54,8 +54,8 @@ print(ggerf(3, params))
 # data_frame
 independent_var   = np.array(range(n_data)) * beta_true / (n_data-1)
 measurement_value = ggerf(independent_var, params_true)
-measurement_std   = n_data * [ 0.5 ]
-constant_one      = n_data * [ 1.0 ]
+measurement_std   = n_data * [ 1 ]
+constant_one      = n_data * [ 1 ]
 data_group        = n_data * [ 'world' ]
 data_dict         = {
     'independent_var'   : independent_var   ,

@@ -55,3 +55,4 @@ p = params[2]
 x = alpha * (t - beta)
 
 print(erf(x))
+
