@@ -32,8 +32,10 @@ def ggerf(t, params):
     beta = params[1]
     p = params[2]
     x = alpha * (t - beta)
+    # print(x)
     return p / 2 * (1 + erf(x))
 
+print(erf(3))
 
 # link function used for beta
 def identity_fun(x) :
@@ -47,9 +49,7 @@ def exp_fun(x) :
 
 params_true = np.array([alpha_true, beta_true, p_true])
 
-params = np.array([1, 2, 3])
-
-print(ggerf(3, params))
+print(ggerf(3, params_true))
 
 # data_frame
 independent_var   = np.array(range(n_data)) * beta_true / (n_data-1)
@@ -66,7 +66,7 @@ data_dict         = {
 }
 data_frame        = pandas.DataFrame(data_dict)
 
-print(data_frame)
+# print(data_frame)
 
 # curve_model
 col_t        = 'independent_var'
