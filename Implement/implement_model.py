@@ -18,9 +18,14 @@ from curvefit.glm_function import generalized_gaussian_error_function
 from curvefit.link_function import exp_fun, identity_fun
 
 
-df = pd.read_csv(os.getcwd() + "/implement/data/Italy_death_rate.csv")
-df = df.loc[df["day"] > 0, ]
+df = pd.read_csv(os.getcwd() + "/implement/data/Spain_death_rate.csv")
+# The threshold for cumulative death rate is 0.31 per million
+df = df.loc[df["cdr"] > (0.31 / 1e6), ]
 
+# convert
+# df["cdr_2"] = df["cdr"] * 1e6
+
+print(df)
 # curve_model
 col_t = 'day'
 col_obs = 'cdr'
