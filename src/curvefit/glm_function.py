@@ -6,7 +6,6 @@ some generalized linear models are here.
 """
 
 
-import math
 import numpy as np
 from scipy.special import erf
 
@@ -24,4 +23,4 @@ def generalized_logistic(t, params) :
     beta = params[1]
     p = params[2]
     x = - alpha * (t - beta)
-    return p / (1 + math.exp(x))
+    return p / (1 + np.exp(x))

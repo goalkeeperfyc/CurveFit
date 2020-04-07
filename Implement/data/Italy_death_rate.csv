@@ -1,4 +1,4 @@
-date,cumulative_death,cdr,population,day,constant_one,std,Italy
+date,cumulative_death,cdr,population,day,constant_one,std,country
 1/22/2020,0,0,60482227,0,1,8.55705E-05,Italy
 1/23/2020,0,0,60482227,0,1,8.55705E-05,Italy
 1/24/2020,0,0,60482227,0,1,8.55705E-05,Italy

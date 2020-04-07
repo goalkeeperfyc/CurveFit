@@ -18,8 +18,8 @@ from curvefit.glm_function import generalized_gaussian_error_function
 from curvefit.link_function import exp_fun, identity_fun
 
 
-df = pd.read_csv(os.getcwd() + "/implement/data/US_death_rate.csv")
-
+df = pd.read_csv(os.getcwd() + "/implement/data/Italy_death_rate.csv")
+df = df.loc[df["day"] > 0, ]
 
 # curve_model
 col_t = 'day'
@@ -61,6 +61,6 @@ print(params_estimate)
 
 # sys.exit(0)
 
-t = generalized_gaussian_error_function(61, params_estimate)
+t = generalized_gaussian_error_function(df["cdr"], params_estimate)
 
 print(str(t))
