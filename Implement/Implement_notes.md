@@ -1,5 +1,15 @@
 # Implement Notes
 
+## Important Info
+
+- Target: cumulative death rate / population. It's extensionable.
+- Not well documented. The example is to create `independent_var`.
+- We don't miss any death cases. But for testing positive cases, we may miss some.
+- For SIR model, S is unknown, I has a huge error at the beginning because test capacity can't cover all patients.
+- Other advanced model: MSEIRS, MSEIR.
+- We only have four factors SEIR
+
+
 ## Understand Parameters
 
 - [x] col_t: independent variable (`time t`).

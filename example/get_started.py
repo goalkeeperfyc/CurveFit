@@ -58,7 +58,10 @@ print("t is %s, the fitted value is %s"
       % ("3", generalized_logistic(3, params_true)))
 
 # data_frame
-independent_var   = numpy.array(range(n_data)) * beta_true / (n_data-1)
+# independent_var   = numpy.array(range(n_data)) * beta_true / (n_data-1)
+independent_var   = numpy.array(range(n_data)) * 2 / (n_data-1)
+# independent_var   = numpy.array(range(n_data))
+# independent_var   = numpy.array(range(n_data)) / (n_data-1)
 measurement_value = simulated_generalized_logistic(independent_var, params_true)
 measurement_std   = n_data * [ 0.1 ]
 constant_one      = n_data * [ 0.5 ]
@@ -72,7 +75,7 @@ data_dict         = {
 }
 data_frame        = pandas.DataFrame(data_dict)
 
-print(data_frame)
+# print(data_frame)
 
 # curve_model
 col_t        = 'independent_var'
