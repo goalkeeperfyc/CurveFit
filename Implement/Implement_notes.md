@@ -9,6 +9,10 @@
 - Other advanced model: MSEIRS, MSEIR.
 - We only have four factors SEIR
 
+## link
+- https://github.com/ihmeuw-msca/CurveFit/issues/35
+- https://ndlib.readthedocs.io/en/latest/reference/models/epidemics/SEIR.html
+- https://github.com/covid-projections/covid-data-model
 
 ## Understand Parameters
 
