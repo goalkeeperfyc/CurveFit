@@ -35,7 +35,7 @@ def ggerf(t, params):
     # print(x)
     return p / 2 * (1 + erf(x))
 
-print(erf(3))
+# print(erf(3))
 
 # link function used for beta
 def identity_fun(x) :
@@ -49,7 +49,7 @@ def exp_fun(x) :
 
 params_true = np.array([alpha_true, beta_true, p_true])
 
-print(ggerf(3, params_true))
+# print(ggerf(3, params_true))
 
 # data_frame
 independent_var   = np.array(range(n_data)) * beta_true / (n_data-1)
@@ -101,8 +101,15 @@ params_estimate = curve_model.params
 #     rel_error = params_estimate[i] / params_true[i] - 1.0
 #     assert abs(rel_error) < rel_tol
 #
-print('get_started.py: OK')
+# print('get_started.py: OK')
 
-print(params_estimate)
+# print(params_estimate)
 
 # sys.exit(0)
+
+if __name__ == "__main__":
+    params = np.array([1, 20, 2])
+    t = np.array([1, 2, 3, 4, 5, 6])
+    print(ggerf(t, params))
+    x = params[0] * (t - params[1])
+    print(erf(x))

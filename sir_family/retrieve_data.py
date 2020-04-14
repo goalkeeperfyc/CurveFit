@@ -21,6 +21,19 @@ death_us = pd.read_csv(fold_path
 
 output_path = "D:/python_code/CurveFit/sir_family/data/"
 
+country_population_dict = {
+    "United Kingdom": 55980000,
+    "France": 1386000000,
+    "Italy": 60360000,
+    "Spain": 46940000,
+    "California": 39510000,
+    "New York": 19540000,
+    "New Jersey": 8882000,
+    "Florida": 21300000,
+    "Korea, South": 51470000,
+    "Washington": 7615000
+}
+
 
 def country_level(
     country, 
@@ -41,6 +54,7 @@ def country_level(
                              global_wanted_cols]
     death = np.sum(death)
     result_df["death_count"] = death
+    result_df["death_rate"] = death / country_population_dict[country]
     result_df.to_csv(output_path + country + ".csv")
     return result_df
 
@@ -67,6 +81,7 @@ def state_level(
                          us_wanted_cols]
     death = np.sum(death)
     result_df["death_count"] = death
+    result_df["death_rate"] = death / country_population_dict[state]
     result_df.to_csv(output_path + state + ".csv")
     return result_df
 
