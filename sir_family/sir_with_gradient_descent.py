@@ -4,7 +4,7 @@ import autograd
 from autograd.builtins import tuple
 import autograd.numpy as np
 
-from scipy.integrate import odeint as BlackBox
+from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 
 
@@ -49,9 +49,9 @@ def Cost(y_obs):
         '''Squared Error Loss'''
         n = y_obs.shape[0]
         err = np.linalg.norm(y_obs - Y, 2, axis = 1)
-
-        return np.sum(err)/n
-
+        print("The cost is ", str(np.sum(err) / n))
+        return np.sum(err) / n
+    
     return cost
 
 
@@ -63,41 +63,44 @@ t = np.linspace(0, 5, len(confirm))
 
 ground_truth = np.array([1 - confirm, confirm]).reshape(-1, 2)
 
-plt.scatter(t, 
-            ground_truth[:,0],
-            marker='.', alpha=0.5,
-            label='ground truth S')
-plt.scatter(t, 
-            ground_truth[:,1], 
-            marker='.', 
-            alpha=0.5,
-            label='ground truth I')
+# plt.scatter(t, 
+#             ground_truth[:,0],
+#             marker='.', alpha=0.5,
+#             label='ground truth S')
+# plt.scatter(t, 
+#             ground_truth[:,1], 
+#             marker='.', 
+#             alpha=0.5,
+#             label='ground truth I')
 
-plt.legend()
+# plt.legend()
 
+# how many iterations 
 i = 0
+
+# comparing how much the theta changed from last iteration
 last_theta = 0
-theta = 1.5
+theta = 3.5
+
 cost = Cost(ground_truth[:,:2])
 grad_C = autograd.grad(cost)
 
 maxiter = 10000
 learning_rate = 1 #Big steps
 
-while i < maxiter and abs(theta - last_theta) > 1e-10:
+while i < maxiter and abs(theta - last_theta) > 1e-4:
     i += 1
     last_theta = theta
-    sol = BlackBox(ODESYS, y0=Y0, t=t, args=tuple([theta]))
+    sol = odeint(ODESYS, y0=Y0, t=t, args=tuple([theta]))
     Y = sol[:,:2]
     
     theta -= learning_rate * (grad_C(Y) * sol[:, -2:]).sum()
     if i % 10 == 0:
         print(theta)
+        print("The current iteration is %s" % i)
     
 
-predict = BlackBox(ODESYS, y0 = Y0, t = t, args = tuple([theta]))
-# true_sol = BlackBox(ODESYS, y0 = Y0, t = t, args = tuple([theta]))
-
+predict = odeint(ODESYS, y0 = Y0, t = t, args = tuple([theta]))
 
 plt.plot(t, predict[:, 0], label = 'Predicted S', color = 'C0', linewidth = 5)
 plt.plot(t, predict[:, 1], label = 'Predicted I', color = 'C1', linewidth = 5)
